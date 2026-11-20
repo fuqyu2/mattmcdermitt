@@ -5103,7 +5103,7 @@ uniform vec4 uRect; void main(){ vec2 c=vec2(float(gl_VertexID&1),float(gl_Verte
 const FS_SPINC=`#version 300 es
 precision highp float; uniform sampler2D uT; uniform vec4 uOff; out vec4 oC;
 void main(){ ivec2 p=2*ivec2(gl_FragCoord.xy-uOff.xy); vec4 a=texelFetch(uT,p,0),b=texelFetch(uT,p+ivec2(1,0),0),c=texelFetch(uT,p+ivec2(0,1),0),d=texelFetch(uT,p+ivec2(1,1),0),av=.25*(a+b+c+d),mx=max(max(a,b),max(c,d)),mn=min(min(a,b),min(c,d));
-  oC=mix(av,mx,.65*smoothstep(.28,.5,dot(mn.rgb,vec3(.3333))))*uOff.z; }      // (MATRIX 75c: edges get the plain average; inside the lit letters a sparkle keeps its point)`;
+  float la=dot(av.rgb,vec3(.3333)); oC=(av+(mx-av)*(.8*smoothstep(.28,.5,dot(mn.rgb,vec3(.3333)))*smoothstep(.22,.5,dot(mx.rgb,vec3(.3333))-la)))*uOff.z; }      // (MATRIX 75c: edges get the plain average; inside the lit letters a sparkle keeps its point)`;
 // MATRIX 41: its spin, on the wall's own clock: quarter turns one into the next, never stopping. Within each it is fastest through
 // the corner and slowest as a face squares up to the eye (CFG.spin.ease[0] slower than its pace there); every few quarter turns it
 // changes its way, slower still where it does (ease[1]); its pace follows the wall's (slower while the wall settles, quicker while
