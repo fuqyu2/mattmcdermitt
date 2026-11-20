@@ -5293,7 +5293,7 @@ function cutTo(t,sp){const c=irisCoord(t),request={sp,at:irisWhen(c),pat:false};
   t.iris=sp.act&&t.face[0].act?{request,c,geom:faceGeom(sp,1,1),dm0:t.dmv==null?1:t.dmv}:null;if(!t.iris)t.dmv=t.dm1==null?1:t.dm1;}
 function m73Front(wave,j,at){IR.seed=((j+3)*2.399963+1.7)%6.2832;IR.key=CFG.m73.key;IR.drift=0;
   if(wave){const ang=.43+j*2.39996323;IR.mode=1;IR.dx=Math.cos(ang);IR.dy=Math.sin(ang);IR.ext=(Math.abs(IR.dx)*wallW+Math.abs(IR.dy)*wallH)*camOut()/(2*pitchX);IR.sp=CFG.liquid.sweepSpeed+IR.ext*.24;IR.t0=at;IR.hw=1;IR.mg=2.1;}
-  else{IR.mode=0;IR.t0=at+(j>=0?m73Sb(j):0);IR.speed=6.5;IR.r0=-1.2;IR.hw=1.5;IR.mg=3.5;}}
+  else{IR.mode=0;IR.t0=at+(j>=0?m73Sb(j):0);IR.speed=7.2;IR.r0=-1.2;IR.hw=1.5;IR.mg=3.5;}}
 // a cube's colour at a spot, as the soft edge crosses it
 function m73Region(q,x,y){let rg=regionOf(q.face[0],x,y);const w=q.iris;if(rg&&w&&q.want===w.request){const k=irisW(w.c,irisFront(NOW));
     if(k>0){const r2=regionOf({act:1,sp:w.request.sp,tOn:0},x,y);if(r2)rg=[rg[0]+(r2[0]-rg[0])*k,rg[1]+(r2[1]-rg[1])*k,rg[2]+(r2[2]-rg[2])*k];}}return rg;}
