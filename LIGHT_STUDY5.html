@@ -184,7 +184,7 @@ function makeLight2(){
     const chr=change?pm((H.charNow|0)+(tau<0?1:0),7):0,nm=chr===0,K=(nm?cfg.nameK:1)*cfg.presence,on=cfg.on,pk=nm?cfg.peakName:cfg.peak;      // (the name's turns are the strong ones: the first landing, and each time the name comes round)
     // the bed: the first build's layered rings, full at the slam, fading like far lightning
     const G=tau>=0?sm(tau/.4)*Math.exp(-tau/1.25)*(1-sm((tau-3.4)/.8)):0;
-    c1.on=on;c1.presence=cfg.liquid*G*cfg.presence;c1.pace=cfg.pace;c1.intricacy=cfg.intricacy;c1.calm=cfg.calm;c1.open=cfg.open;c1.pointer=0;c1.name=cfg.name;
+    c1.on=on;c1.presence=cfg.liquid*G*cfg.presence;c1.pace=cfg.pace;c1.intricacy=cfg.intricacy;c1.calm=cfg.calm;c1.open=cfg.open;c1.pointer=cfg.pointer;c1.name=cfg.name;
     L1.step(t,dt,H);
     const m1=L1.m,O=L1.o,hw=H.hw0||H.hw||7,hh=H.hh0||H.hh||4.4,pon=H.ply&&H.ply.on;nz+=((pon?0:1)-nz)*Math.min(1,dt/.12);
     const fl=cfg.flash?((change?.45*flashAt(tau+.70):0)+(nm&&!change?.45*flashAt(tau):0))*cfg.flash:0;
@@ -226,7 +226,7 @@ function makeLight2(){
       let pg=0;if(pw>0&&cfg.pointer){const dx=x-px,dy=y-py;pg=pw*nz*Math.exp(-(dx*dx+dy*dy)/3.4);}      // the pointer: a small glow that follows it, by its speed, and its wake in the glass
       let s=S[i]+=(a-S[i])*(a>S[i]?up:dn);HS[i]+=(h+.1*pg-HS[i])*hk;
       // no screen lights more than twice in any second: a third lighting inside the second waits its turn
-      if(!LT[i]){if(s+ff>=.15){if(ff<.15&&t-TA[i]<1.02){s=S[i]=.14-ff;}else{LT[i]=1;TA[i]=TB[i];TB[i]=t;}}}else if(s+ff<.07)LT[i]=0;      // (the flash cannot wait; it is counted)
+      if(!LT[i]){if(s+ff>=.15){if(ff<.15&&t-TA[i]<1.02){s=S[i]=ff<.12?.12-ff:0;}else{LT[i]=1;TA[i]=TB[i];TB[i]=t;}}}else if(s+ff<.07)LT[i]=0;      // (the flash cannot wait; it is counted)
       let v=1;if(on){v+=s+.3*pg+fl*nz;if(v>pk)v=pk;if(v<1)v=1;}
       M[i]=v;HH[i]=on?HS[i]:0;sa+=v;if(v>mx)mx=v;}
     O[0]=O[0]*(1+.5*fl*nz);L.fl=fl;L.tau=tau;L.G=G;L.j=j;
